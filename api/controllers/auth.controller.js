@@ -1,8 +1,9 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
+import { errorHandler } from "../utils/error.js";
 
 // Asynchronous function because of connection to DB
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
 	const { username, email, password } = req.body;
 
 	if (
@@ -13,7 +14,8 @@ export const signup = async (req, res) => {
 		email === "" ||
 		password === ""
 	) {
-		return res.status(400).json({ message: "All fields are required" });
+		// Call errorHandler utility function for custom error
+		next(errorHandler(400, "All fields are required"));
 	}
 
 	// Encrypt password using bcrypt
@@ -25,6 +27,7 @@ export const signup = async (req, res) => {
 		await newUser.save();
 		res.json("Signup successful");
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		// Throw error using middleware from index.js
+		next(error);
 	}
 };
