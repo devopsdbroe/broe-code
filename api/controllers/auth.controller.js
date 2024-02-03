@@ -3,7 +3,7 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
-// Asynchronous function because of connection to DB
+// Asynchronous function for connection to DB
 export const signup = async (req, res, next) => {
 	const { username, email, password } = req.body;
 
@@ -22,6 +22,7 @@ export const signup = async (req, res, next) => {
 	// Encrypt password using bcrypt
 	const hashedPassword = bcryptjs.hashSync(password, 10);
 
+	// Create new user for MongoDB
 	const newUser = new User({ username, email, password: hashedPassword });
 
 	try {
@@ -74,13 +75,17 @@ export const signin = async (req, res, next) => {
 };
 
 export const google = async (req, res, next) => {
+	// Get email, full name, and profile pic
 	const { email, name, googlePhotoUrl } = req.body;
 
 	try {
+		// Check MongoDB for matching email from request
 		const user = await User.findOne({ email });
 
+		// If that user exists, create a token using JWT
 		if (user) {
 			const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+			// Remove password from response
 			const { password, ...rest } = user._doc;
 			res
 				.status(200)
@@ -89,6 +94,7 @@ export const google = async (req, res, next) => {
 				})
 				.json(rest);
 		} else {
+			// If user has not been created, generate new password and username
 			const generatedPassword =
 				Math.random().toString(36).slice(-8) +
 				Math.random().toString(36).slice(-8);
