@@ -72,7 +72,7 @@ export default function Header() {
 						</Link>
 						<Dropdown.Divider />
 						{/* TODO: Add sign out funcitonality */}
-						<Dropdown.Item>Sign out</Dropdown.Item>
+						<Dropdown.Item>Sign Out</Dropdown.Item>
 					</Dropdown>
 				) : (
 					<Link to="/sign-in">
