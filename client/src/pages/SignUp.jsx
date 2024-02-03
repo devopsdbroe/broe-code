@@ -6,6 +6,7 @@ export default function SignUp() {
 	const [formData, setFormData] = useState({});
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
+
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
@@ -17,7 +18,7 @@ export default function SignUp() {
 		e.preventDefault();
 
 		if (!formData.username || !formData.email || !formData.password) {
-			return setError("Please fill out all fields");
+			return setError("Please fill out all fields.");
 		}
 
 		try {
@@ -34,6 +35,7 @@ export default function SignUp() {
 				return setError(data.message);
 			}
 
+			// If successful, reroute user to sign-in page
 			setLoading(false);
 			if (res.ok) {
 				navigate("/sign-in");
