@@ -246,9 +246,7 @@ export default function DashProfile() {
 			</form>
 			<div className="text-red-500 flex justify-between mt-5">
 				<span
-					onClick={() => {
-						setShowModal(true);
-					}}
+					onClick={() => setShowModal(true)}
 					className="cursor-pointer"
 				>
 					Delete Account
