@@ -20,7 +20,7 @@ const app = express();
 
 app.use(express.json());
 
-// Initialize cookie parser
+// Initialize cookie-parser
 app.use(cookieParser());
 
 app.listen(3000, () => {

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { app } from "../firebase";
 import {
 	getDownloadURL,
@@ -22,7 +23,7 @@ import {
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function DashProfile() {
-	const { currentUser, error } = useSelector((state) => state.user);
+	const { currentUser, error, loading } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 
 	// State for profile pic update
@@ -240,9 +241,21 @@ export default function DashProfile() {
 					type="submit"
 					gradientDuoTone="purpleToBlue"
 					outline
+					disabled={loading || imageUploading}
 				>
-					Update
+					{loading ? "Loading..." : "Update"}
 				</Button>
+				{currentUser.isAdmin && (
+					<Link to={"/create-post"}>
+						<Button
+							type="button"
+							gradientDuoTone="purpleToPink"
+							className="w-full"
+						>
+							Create a post
+						</Button>
+					</Link>
+				)}
 			</form>
 			<div className="text-red-500 flex justify-between mt-5">
 				<span
