@@ -27,7 +27,12 @@ export default function UpdatePost() {
 	// State related to publishing blog post
 	const [publishError, setPublishError] = useState(null);
 
-	const [formData, setFormData] = useState({});
+	const [formData, setFormData] = useState({
+		title: "",
+		category: "",
+		content: "",
+		image: "",
+	});
 
 	useEffect(() => {
 		try {
