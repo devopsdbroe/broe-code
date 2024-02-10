@@ -26,7 +26,7 @@ export default function DashPosts() {
 					}
 				}
 			} catch (error) {
-				console.log(error);
+				console.log(error.message);
 			}
 		};
 
