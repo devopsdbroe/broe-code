@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Alert, Button, Textarea } from "flowbite-react";
 import Comment from "./Comment";
 
 export default function CommentSection({ postId }) {
+	const navigate = useNavigate();
 	const { currentUser } = useSelector((state) => state.user);
 
 	// Comment state to be sent to DB on submit
@@ -61,6 +62,36 @@ export default function CommentSection({ postId }) {
 			}
 		} catch (error) {
 			setCommentError(error.message);
+		}
+	};
+
+	const handleLike = async (commentId) => {
+		try {
+			if (!currentUser) {
+				navigate("/sign-in");
+				return;
+			}
+
+			const res = await fetch(`/api/comment/likeComment/${commentId}`, {
+				method: "PUT",
+			});
+			const data = await res.json();
+
+			if (res.ok) {
+				setComments(
+					comments.map((comment) =>
+						comment._id === commentId
+							? {
+									...comment,
+									likes: data.likes,
+									numberOfLikes: data.numberOfLikes,
+							  }
+							: comment
+					)
+				);
+			}
+		} catch (error) {
+			console.log(error.message);
 		}
 	};
 
@@ -143,6 +174,7 @@ export default function CommentSection({ postId }) {
 						<Comment
 							key={comment._id}
 							comment={comment}
+							onLike={handleLike}
 						/>
 					))}
 				</>
