@@ -19,6 +19,7 @@ import {
 	deleteSuccess,
 	deleteFailure,
 	signoutSuccess,
+	resetError,
 } from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
@@ -48,7 +49,12 @@ export default function DashProfile() {
 		if (imageFile) {
 			uploadImage();
 		}
-	}, [imageFile]);
+
+		// Cleanup function to remove error message (if there is one)
+		return () => {
+			dispatch(resetError());
+		};
+	}, [imageFile, dispatch]);
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];

@@ -143,7 +143,6 @@ export default function UpdatePost() {
 						}
 						value={formData.title}
 					/>
-					{/* TODO: Add all teams to selector */}
 					<Select
 						onChange={(e) =>
 							setFormData({ ...formData, category: e.target.value })

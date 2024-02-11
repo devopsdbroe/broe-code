@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
 	key: "root",
 	storage,
+	blacklist: ["error"],
 	version: 1,
 };
 
