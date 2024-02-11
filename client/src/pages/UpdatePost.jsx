@@ -30,6 +30,7 @@ export default function UpdatePost() {
 
 	const [formData, setFormData] = useState({
 		title: "",
+		author: "",
 		category: "",
 		content: "",
 		image: "",
@@ -131,17 +132,26 @@ export default function UpdatePost() {
 				className="flex flex-col gap-4"
 				onSubmit={handleSubmit}
 			>
+				<TextInput
+					type="text"
+					placeholder="Title"
+					required
+					id="title"
+					className="w-full"
+					onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+					value={formData.title}
+				/>
 				<div className="flex flex-col gap-4 sm:flex-row justify-between">
 					<TextInput
 						type="text"
-						placeholder="Title"
+						placeholder="Author"
 						required
-						id="title"
+						id="author"
 						className="flex-1"
 						onChange={(e) =>
-							setFormData({ ...formData, title: e.target.value })
+							setFormData({ ...formData, author: e.target.value })
 						}
-						value={formData.title}
+						value={formData.author}
 					/>
 					<Select
 						onChange={(e) =>
@@ -151,7 +161,12 @@ export default function UpdatePost() {
 					>
 						<option value="uncategorized">Select a team</option>
 						{teams.map((team) => (
-							<option value={team.value}>{team.name}</option>
+							<option
+								key={team.id}
+								value={team.value}
+							>
+								{team.name}
+							</option>
 						))}
 					</Select>
 				</div>

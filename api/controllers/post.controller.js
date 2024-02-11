@@ -1,4 +1,3 @@
-import { error } from "console";
 import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/error.js";
 
@@ -7,10 +6,12 @@ export const create = async (req, res, next) => {
 		return next(errorHandler(403, "You are not allowed to create a post"));
 	}
 
-	if (!req.body.title || !req.body.content) {
+	// Check to make sure user fills out all required fields
+	if (!req.body.title || !req.body.content || !req.body.author) {
 		return next(errorHandler(400, "Please provide all required fields"));
 	}
 
+	// Create slug for post URL
 	const slug = req.body.title
 		.split(" ")
 		.join("-")
@@ -44,6 +45,7 @@ export const getPosts = async (req, res, next) => {
 			...(req.query.searchTerm && {
 				$or: [
 					{ title: { $regex: req.query.searchTerm, $options: "i" } },
+					{ author: { $regex: req.query.searchTerm, $options: "i" } },
 					{ content: { $regex: req.query.searchTerm, $options: "i" } },
 				],
 			}),
@@ -102,6 +104,7 @@ export const updatePost = async (req, res, next) => {
 			{
 				$set: {
 					title: req.body.title,
+					author: req.body.author,
 					content: req.body.content,
 					category: req.body.category,
 					image: req.body.image,

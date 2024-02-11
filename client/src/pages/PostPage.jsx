@@ -66,7 +66,8 @@ export default function PostPage() {
 			/>
 			<div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs">
 				<span>
-					Posted {post && new Date(post.createdAt).toLocaleDateString()}
+					Posted by {post && post.author} on{" "}
+					{post && new Date(post.createdAt).toLocaleDateString()}
 				</span>
 				{/* Calculate estimated read time based on length of article */}
 				<span className="italic">
