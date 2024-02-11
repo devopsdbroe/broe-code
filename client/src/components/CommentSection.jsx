@@ -1,20 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Alert, Button, Textarea } from "flowbite-react";
+import Comment from "./Comment";
 
 export default function CommentSection({ postId }) {
 	const { currentUser } = useSelector((state) => state.user);
 
 	// Comment state to be sent to DB on submit
-	const [comment, setComment] = useState("");
+	const [newComment, setNewComment] = useState("");
 	const [commentError, setCommentError] = useState(null);
+
+	// State for all comments on a post
+	const [comments, setComments] = useState([]);
+
+	console.log(comments);
+
+	useEffect(() => {
+		const getComments = async () => {
+			try {
+				const res = await fetch(`/api/comment/getPostComments/${postId}`);
+				const data = await res.json();
+
+				if (res.ok) {
+					setComments(data);
+				}
+			} catch (error) {
+				console.log(error.message);
+			}
+		};
+		getComments();
+	}, [postId]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		// Protection from if comment is longer than 200 characters
-		if (comment.length > 200) {
+		if (newComment.length > 200) {
 			return;
 		}
 
@@ -26,7 +48,7 @@ export default function CommentSection({ postId }) {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					content: comment,
+					content: newComment,
 					postId,
 					userId: currentUser._id,
 				}),
@@ -35,8 +57,9 @@ export default function CommentSection({ postId }) {
 
 			if (res.ok) {
 				// Clear comment state on successful submit
-				setComment("");
+				setNewComment("");
 				setCommentError(null);
+				setComments([data, ...comments]);
 			}
 		} catch (error) {
 			setCommentError(error.message);
@@ -80,12 +103,12 @@ export default function CommentSection({ postId }) {
 						placeholder="Add a comment"
 						rows="3"
 						maxLength="200"
-						value={comment}
-						onChange={(e) => setComment(e.target.value)}
+						value={newComment}
+						onChange={(e) => setNewComment(e.target.value)}
 					/>
 					<div className="flex justify-between items-center mt-5">
 						<p className="text-gray-500 text-xs">
-							{200 - comment.length} characters remaining
+							{200 - newComment.length} characters remaining
 						</p>
 						<Button
 							outline
@@ -104,6 +127,27 @@ export default function CommentSection({ postId }) {
 						</Alert>
 					)}
 				</form>
+			)}
+			{comments.length === 0 ? (
+				<p className="text-sm my-5">
+					Start the discussion! Be the first to comment.
+				</p>
+			) : (
+				// Show the number of comments
+				<>
+					<div className="text-sm my-5 flex items-center gap-1">
+						<p>Comments</p>
+						<div className="border border-gray-400 py-1 px-2 rounded-sm">
+							<p>{comments.length}</p>
+						</div>
+					</div>
+					{comments.map((comment) => (
+						<Comment
+							key={comment._id}
+							comment={comment}
+						/>
+					))}
+				</>
 			)}
 		</div>
 	);
