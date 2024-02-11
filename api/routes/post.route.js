@@ -10,8 +10,8 @@ import {
 const router = express.Router();
 
 router.post("/create", verifyToken, create);
-router.get("/getposts", getPosts);
-router.delete("/deletepost/:postId/:userId", verifyToken, deletePost);
-router.put("/updatepost/:postId/:userId", verifyToken, updatePost);
+router.get("/getPosts", getPosts);
+router.delete("/deletePost/:postId/:userId", verifyToken, deletePost);
+router.put("/updatePost/:postId/:userId", verifyToken, updatePost);
 
 export default router;
