@@ -13,6 +13,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { teams } from "../../constants/data";
 
 export default function UpdatePost() {
 	const navigate = useNavigate();
@@ -149,10 +150,10 @@ export default function UpdatePost() {
 						}
 						value={formData.category}
 					>
-						<option value="uncategorized">Select a category</option>
-						<option value="team1">Team 1</option>
-						<option value="team2">Team 2</option>
-						<option value="team3">Team 3</option>
+						<option value="uncategorized">Select a team</option>
+						{teams.map((team) => (
+							<option value={team.value}>{team.name}</option>
+						))}
 					</Select>
 				</div>
 				<div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
