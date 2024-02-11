@@ -95,6 +95,18 @@ export default function CommentSection({ postId }) {
 		}
 	};
 
+	// Function is at this level because comments state is changing
+	const handleEdit = async (comment, editedContent) => {
+		setComments(
+			comments.map((c) =>
+				// Compare ID of comment passed to function vs each existing comment until match is found
+				// For match, only change content to editied content passed to function
+				// If no match, keep comment the same
+				c._id === comment._id ? { ...c, content: editedContent } : c
+			)
+		);
+	};
+
 	return (
 		<div className="max-w-2xl mx-auto w-full p-3">
 			{currentUser ? (
@@ -175,6 +187,7 @@ export default function CommentSection({ postId }) {
 							key={comment._id}
 							comment={comment}
 							onLike={handleLike}
+							onEdit={handleEdit}
 						/>
 					))}
 				</>
