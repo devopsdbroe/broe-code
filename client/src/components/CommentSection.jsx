@@ -14,8 +14,6 @@ export default function CommentSection({ postId }) {
 	// State for all comments on a post
 	const [comments, setComments] = useState([]);
 
-	console.log(comments);
-
 	useEffect(() => {
 		const getComments = async () => {
 			try {
