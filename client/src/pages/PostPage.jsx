@@ -68,7 +68,7 @@ export default function PostPage() {
 				<span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
 				{/* Calculate estimated read time based on length of article */}
 				<span className="italic">
-					{post && (post.content.length / 1000).toFixed(0)} mins read
+					{post && (post.content.length / 1000).toFixed(0)} min read
 				</span>
 			</div>
 			<div

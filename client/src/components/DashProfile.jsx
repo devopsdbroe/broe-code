@@ -122,16 +122,16 @@ export default function DashProfile() {
 			});
 			const data = await res.json();
 
-			if (!res) {
+			if (!res.ok) {
 				dispatch(updateFailure(data.message));
-				setUpdateUserError(data.message);
+				// setUpdateUserError(data.message);
 			} else {
 				dispatch(updateSuccess(data));
 				setUpdateUserSuccess("User profile updated successfully");
 			}
 		} catch (error) {
 			dispatch(updateFailure(error.message));
-			setUpdateUserError(error.message);
+			// setUpdateUserError(error.message);
 		}
 	};
 
