@@ -195,7 +195,7 @@ export default function CommentSection({ postId }) {
 			)}
 			{comments.length === 0 ? (
 				<p className="text-sm my-5">
-					Start the discussion! Be the first to comment.
+					Start the discussion! Be the first to comment on this post.
 				</p>
 			) : (
 				// Show the number of comments

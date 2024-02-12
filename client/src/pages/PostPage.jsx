@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CallToAction from "../components/CallToAction";
 import CommentSection from "../components/CommentSection";
+import PostCard from "../components/PostCard";
 
 export default function PostPage() {
 	const { postSlug } = useParams();
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [post, setPost] = useState(null);
+
+	// State for recent articles
+	const [recentPosts, setRecentPosts] = useState(null);
 
 	useEffect(() => {
 		const fetchPost = async () => {
@@ -34,6 +38,22 @@ export default function PostPage() {
 		};
 		fetchPost();
 	}, [postSlug]);
+
+	useEffect(() => {
+		const fetchRecentPosts = async () => {
+			try {
+				const res = await fetch("/api/post/getPosts?limit=3");
+				const data = await res.json();
+
+				if (res.ok) {
+					setRecentPosts(data.posts);
+				}
+			} catch (error) {
+				console.log(error.message);
+			}
+		};
+		fetchRecentPosts();
+	}, []);
 
 	if (loading)
 		return (
@@ -66,8 +86,8 @@ export default function PostPage() {
 			/>
 			<div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs">
 				<span>
-					Posted by {post && post.author} on{" "}
-					{post && new Date(post.createdAt).toLocaleDateString()}
+					By <span className="font-bold">{post && post.author}</span> - Posted
+					on {post && new Date(post.createdAt).toLocaleDateString()}
 				</span>
 				{/* Calculate estimated read time based on length of article */}
 				<span className="italic">
@@ -82,6 +102,18 @@ export default function PostPage() {
 				<CallToAction />
 			</div>
 			<CommentSection postId={post._id} />
+			<div className="flex flex-col justify-center items-center mb-5">
+				<h1 className="text-xl mt-5">Recent Articles</h1>
+				<div className="flex flex-wrap gap-5 mt-5 justify-center">
+					{recentPosts &&
+						recentPosts.map((post) => (
+							<PostCard
+								key={post._id}
+								post={post}
+							/>
+						))}
+				</div>
+			</div>
 		</main>
 	);
 }

@@ -89,7 +89,6 @@ export default function Header() {
 							<Dropdown.Item>Profile</Dropdown.Item>
 						</Link>
 						<Dropdown.Divider />
-						{/* TODO: Add sign out funcitonality */}
 						<Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
 					</Dropdown>
 				) : (
