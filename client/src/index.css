@@ -10,6 +10,10 @@ body {
 	font-size: 1.05rem;
 }
 
+.ql-editor.ql-blank:before {
+	color: gray;
+}
+
 .post-content p {
 	margin-bottom: 0.5rem;
 }
