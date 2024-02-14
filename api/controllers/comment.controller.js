@@ -113,7 +113,7 @@ export const getComments = async (req, res, next) => {
 		const startIndex = parseInt(req.query.startIndex) || 0;
 		const limit = parseInt(req.query.limit) || 9;
 		const sortDirection = req.query.sort === "desc" ? -1 : 1;
-		const comments = await Comment.find()
+		let comments = await Comment.find()
 			.populate({
 				path: "postId",
 				select: "title",
@@ -125,6 +125,19 @@ export const getComments = async (req, res, next) => {
 			.sort({ createdAt: sortDirection })
 			.skip(startIndex)
 			.limit(limit);
+
+		// Check to account for posts and users that have been deleted
+		comments = comments.map((comment) => {
+			if (!comment.postId) {
+				comment.postId = { title: "Deleted post" };
+			}
+
+			if (!comment.userId) {
+				comment.userId = { username: "Deleted user" };
+			}
+
+			return comment;
+		});
 
 		const totalComments = await Comment.countDocuments();
 		const now = new Date();

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Modal, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { FaCheck, FaTimes } from "react-icons/fa";
 
 export default function DashComments() {
 	const { currentUser } = useSelector((state) => state.user);
@@ -88,7 +87,7 @@ export default function DashComments() {
 						<Table.Head>
 							<Table.HeadCell>Date updated</Table.HeadCell>
 							<Table.HeadCell>Comment content</Table.HeadCell>
-							<Table.HeadCell>Number of likes</Table.HeadCell>
+							<Table.HeadCell>Likes</Table.HeadCell>
 							<Table.HeadCell>Post Title</Table.HeadCell>
 							<Table.HeadCell>User</Table.HeadCell>
 							<Table.HeadCell>Delete</Table.HeadCell>
