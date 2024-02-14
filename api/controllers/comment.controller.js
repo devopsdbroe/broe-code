@@ -114,6 +114,14 @@ export const getComments = async (req, res, next) => {
 		const limit = parseInt(req.query.limit) || 9;
 		const sortDirection = req.query.sort === "desc" ? -1 : 1;
 		const comments = await Comment.find()
+			.populate({
+				path: "postId",
+				select: "title",
+			})
+			.populate({
+				path: "userId",
+				select: "username",
+			})
 			.sort({ createdAt: sortDirection })
 			.skip(startIndex)
 			.limit(limit);
