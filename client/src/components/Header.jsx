@@ -25,10 +25,10 @@ export default function Header() {
 	useEffect(() => {
 		const urlParams = new URLSearchParams(location.search);
 		const searchTermFromUrl = urlParams.get("searchTerm");
-		if (searchTermFromUrl) {
+		if (searchTermFromUrl && searchTermFromUrl !== searchTerm) {
 			setSearchTerm(searchTermFromUrl);
 		}
-	}, [location.search]);
+	}, [location.search, dispatch]);
 
 	const handleSignout = async () => {
 		try {
