@@ -74,89 +74,104 @@ export default function Header() {
 				Blog
 			</Link>
 			{/* TODO: Change to regular input form and add clickable button to submit */}
-			<form onSubmit={handleSubmit}>
+			<form
+				onSubmit={handleSubmit}
+				className="relative flex lg:w-[400px]"
+			>
 				<TextInput
 					type="text"
 					placeholder="Search"
-					rightIcon={AiOutlineSearch}
-					className="hidden lg:inline"
+					className="pl-3 pr-10 w-full hidden lg:inline" // Adjust padding to make space for the button
 					value={searchTerm}
 					onChange={(e) => dispatch(setSearchTerm(e.target.value))}
 				/>
-			</form>
-			<Button
-				className="w-12 h-10 lg:hidden"
-				color="gray"
-				pill
-			>
-				<AiOutlineSearch />
-			</Button>
-			<div className="flex gap-2 md:order-2">
+				{/* The button is now absolutely positioned within the form. */}
 				<Button
-					className="w-12 h-10 hidden sm:inline"
+					type="submit"
+					className="absolute inset-y-0 right-10 items-center justify-center px-3 hidden lg:flex"
+				>
+					<AiOutlineSearch />
+				</Button>
+			</form>
+			<Link to="/search">
+				<Button
+					className="w-12 h-10 lg:hidden"
 					color="gray"
 					pill
-					onClick={() => dispatch(toggleTheme())}
 				>
-					{theme === "light" ? <FaSun /> : <FaMoon />}
+					<AiOutlineSearch />
 				</Button>
-				{currentUser ? (
-					<Dropdown
-						arrowIcon={false}
-						inline
-						label={
-							<Avatar
-								alt="user"
-								img={currentUser.profilePicture}
-								rounded
-							/>
-						}
-					>
-						<Dropdown.Header>
-							<span className="block text-sm">@{currentUser.username}</span>
-							<span className="block text-sm font-medium truncate">
-								{currentUser.email}
-							</span>
-						</Dropdown.Header>
-						<Link to={"/dashboard?tab=profile"}>
-							<Dropdown.Item>Profile</Dropdown.Item>
-						</Link>
-						<Dropdown.Divider />
-						<Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
-					</Dropdown>
-				) : (
-					<Link to="/sign-in">
-						<Button
-							gradientDuoTone="purpleToBlue"
-							outline
+			</Link>
+			<div className="flex gap-6">
+				<div className="flex items-center">
+					<Navbar.Collapse>
+						<Navbar.Link
+							active={path === "/"}
+							as={"div"}
 						>
-							Sign In
-						</Button>
-					</Link>
-				)}
+							<Link to="/">Home</Link>
+						</Navbar.Link>
+						<Navbar.Link
+							active={path === "/about"}
+							as={"div"}
+						>
+							<Link to="/about">About</Link>
+						</Navbar.Link>
+						<Navbar.Link
+							active={path === "/projects"}
+							as={"div"}
+						>
+							<Link to="/projects">Projects</Link>
+						</Navbar.Link>
+					</Navbar.Collapse>
+				</div>
+				<div className="flex gap-2">
+					<Button
+						className="w-12 h-10 hidden sm:inline"
+						color="gray"
+						pill
+						onClick={() => dispatch(toggleTheme())}
+					>
+						{theme === "light" ? <FaSun /> : <FaMoon />}
+					</Button>
+					{currentUser ? (
+						<Dropdown
+							arrowIcon={false}
+							inline
+							label={
+								<Avatar
+									alt="user"
+									img={currentUser.profilePicture}
+									rounded
+								/>
+							}
+						>
+							<Dropdown.Header>
+								<span className="block text-sm">@{currentUser.username}</span>
+								<span className="block text-sm font-medium truncate">
+									{currentUser.email}
+								</span>
+							</Dropdown.Header>
+							<Link to={"/dashboard?tab=profile"}>
+								<Dropdown.Item>Profile</Dropdown.Item>
+							</Link>
+							<Dropdown.Divider />
+							<Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
+						</Dropdown>
+					) : (
+						<Link to="/sign-in">
+							<Button
+								gradientDuoTone="purpleToBlue"
+								outline
+							>
+								Sign In
+							</Button>
+						</Link>
+					)}
+				</div>
 
 				<Navbar.Toggle />
 			</div>
-			<Navbar.Collapse>
-				<Navbar.Link
-					active={path === "/"}
-					as={"div"}
-				>
-					<Link to="/">Home</Link>
-				</Navbar.Link>
-				<Navbar.Link
-					active={path === "/about"}
-					as={"div"}
-				>
-					<Link to="/about">About</Link>
-				</Navbar.Link>
-				<Navbar.Link
-					active={path === "/projects"}
-					as={"div"}
-				>
-					<Link to="/projects">Projects</Link>
-				</Navbar.Link>
-			</Navbar.Collapse>
 		</Navbar>
 	);
 }
