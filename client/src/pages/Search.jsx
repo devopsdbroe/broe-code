@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Button, Select, TextInput } from "flowbite-react";
 import { teams } from "../../constants/data";
 import PostCard from "../components/PostCard";
+import { clearSearchTerm } from "../redux/search/searchSlice";
 
 export default function Search() {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const [sidebarData, setSidebarData] = useState({
 		searchTerm: "",
@@ -53,6 +56,15 @@ export default function Search() {
 		};
 		fetchPosts();
 	}, [location.search]);
+
+	// useEffect to clear search term in the search bar
+	useEffect(() => {
+		// No logic to execute on mount
+
+		return () => {
+			dispatch(clearSearchTerm());
+		};
+	});
 
 	const handleChange = (e) => {
 		if (e.target.id === "searchTerm") {

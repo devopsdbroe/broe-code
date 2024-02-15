@@ -3,6 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { toggleTheme } from "../redux/theme/themeSlice";
+import {
+	setSearchTerm as setGlobalSearchTerm,
+	setSearchTerm,
+} from "../redux/search/searchSlice";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
@@ -15,9 +19,7 @@ export default function Header() {
 
 	const { currentUser } = useSelector((state) => state.user);
 	const { theme } = useSelector((state) => state.theme);
-
-	// State for search bar
-	const [searchTerm, setSearchTerm] = useState("");
+	const { searchTerm } = useSelector((state) => state.search);
 
 	// useEffect hook to change URL based on params
 	useEffect(() => {
@@ -48,7 +50,8 @@ export default function Header() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const urlParams = new URLSearchParams(location.search);
-		// Set serach term based on state from input value
+		// Set search term globally using Redux
+		dispatch(setGlobalSearchTerm(searchTerm));
 		urlParams.set("searchTerm", searchTerm);
 		const searchQuery = urlParams.toString();
 		navigate(`/search?${searchQuery}`);
@@ -78,7 +81,7 @@ export default function Header() {
 					rightIcon={AiOutlineSearch}
 					className="hidden lg:inline"
 					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
+					onChange={(e) => dispatch(setSearchTerm(e.target.value))}
 				/>
 			</form>
 			<Button
