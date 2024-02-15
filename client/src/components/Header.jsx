@@ -1,17 +1,32 @@
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signoutSuccess } from "../redux/user/userSlice";
+import { toggleTheme } from "../redux/theme/themeSlice";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from "../redux/theme/themeSlice";
-import { signoutSuccess } from "../redux/user/userSlice";
 
 export default function Header() {
 	const path = useLocation().pathname;
+	const location = useLocation();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const { currentUser } = useSelector((state) => state.user);
 	const { theme } = useSelector((state) => state.theme);
+
+	// State for search bar
+	const [searchTerm, setSearchTerm] = useState("");
+
+	// useEffect hook to change URL based on params
+	useEffect(() => {
+		const urlParams = new URLSearchParams(location.search);
+		const searchTermFromUrl = urlParams.get("searchTerm");
+		if (searchTermFromUrl) {
+			setSearchTerm(searchTermFromUrl);
+		}
+	}, [location.search]);
 
 	const handleSignout = async () => {
 		try {
@@ -30,8 +45,20 @@ export default function Header() {
 		}
 	};
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const urlParams = new URLSearchParams(location.search);
+		// Set serach term based on state from input value
+		urlParams.set("searchTerm", searchTerm);
+		const searchQuery = urlParams.toString();
+		navigate(`/search?${searchQuery}`);
+	};
+
 	return (
-		<Navbar className="border-b-2">
+		<Navbar
+			fluid
+			className="border-b-2"
+		>
 			<Link
 				to="/"
 				className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
@@ -43,12 +70,15 @@ export default function Header() {
 				</span>
 				Blog
 			</Link>
-			<form>
+			{/* TODO: Change to regular input form and add clickable button to submit */}
+			<form onSubmit={handleSubmit}>
 				<TextInput
 					type="text"
 					placeholder="Search"
 					rightIcon={AiOutlineSearch}
 					className="hidden lg:inline"
+					value={searchTerm}
+					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
 			</form>
 			<Button

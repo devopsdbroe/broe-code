@@ -37,11 +37,11 @@ export default function Home() {
 			<div className="p-3 bg-amber-100 dark:bg-slate-700">
 				<CallToAction />
 			</div>
-			<div className="max-w-6xl mx-auto px-3 flex flex-col gap-8 py-7">
+			<div className="p-3 flex flex-col max-w-[1400px] mx-auto">
 				{posts && posts.length > 0 && (
-					<div className="flex flex-col gap-6">
-						<h2 className="text-2xl font-semibold text-center">Recent posts</h2>
-						<div className="flex flex-wrap gap-4">
+					<div className="flex flex-col justify-center items-center mb-5">
+						<h2 className="text-xl mt-5 font-semibold">Recent Articles</h2>
+						<div className="flex flex-wrap gap-5 mt-5 justify-center">
 							{posts.map((post) => (
 								<PostCard
 									key={post._id}
@@ -51,7 +51,7 @@ export default function Home() {
 						</div>
 						<Link
 							to="/search"
-							className="text-lg text-teal-500 hover:underline text-center"
+							className="text-lg text-teal-500 hover:underline text-center mt-5"
 						>
 							View all posts
 						</Link>
