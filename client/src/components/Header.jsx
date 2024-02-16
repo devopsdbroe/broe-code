@@ -62,47 +62,52 @@ export default function Header() {
 			fluid
 			className="border-b-2"
 		>
-			<Link
-				to="/"
-				className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
-			>
-				{/* TODO: Update name + styling */}
-				{/* TODO: Create separate Logo component? */}
-				<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-					Football
-				</span>
-				Blog
-			</Link>
-			{/* TODO: Change to regular input form and add clickable button to submit */}
-			<form
-				onSubmit={handleSubmit}
-				className="relative flex lg:w-[400px]"
-			>
-				<TextInput
-					type="text"
-					placeholder="Search"
-					className="pl-3 pr-10 w-full hidden lg:inline" // Adjust padding to make space for the button
-					value={searchTerm}
-					onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-				/>
-				{/* The button is now absolutely positioned within the form. */}
-				<Button
-					type="submit"
-					className="absolute inset-y-0 right-10 items-center justify-center px-3 hidden lg:flex"
+			<div className="flex items-center gap-4">
+				<div>
+					<Link
+						to="/"
+						className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
+					>
+						{/* TODO: Update name + styling */}
+						{/* TODO: Create separate Logo component? */}
+						<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
+							Football
+						</span>
+						Blog
+					</Link>
+				</div>
+			</div>
+			<div>
+				<form
+					onSubmit={handleSubmit}
+					className="relative flex lg:w-[600px]"
 				>
-					<AiOutlineSearch />
-				</Button>
-			</form>
-			<Link to="/search">
-				<Button
-					className="w-12 h-10 lg:hidden"
-					color="gray"
-					pill
-				>
-					<AiOutlineSearch />
-				</Button>
-			</Link>
-			<div className="flex gap-6">
+					<TextInput
+						type="text"
+						placeholder="Search"
+						className="pl-3 pr-10 w-full hidden lg:inline" // Adjust padding to make space for the button
+						value={searchTerm}
+						onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+					/>
+					{/* The button is now absolutely positioned within the form. */}
+					<Button
+						type="submit"
+						className="absolute inset-y-0 right-10 items-center justify-center px-3 hidden lg:flex"
+					>
+						<AiOutlineSearch />
+					</Button>
+				</form>
+				<Link to="/search">
+					<Button
+						className="w-12 h-10 lg:hidden"
+						color="gray"
+						pill
+					>
+						<AiOutlineSearch />
+					</Button>
+				</Link>
+			</div>
+			<div className="flex gap-2 sm:gap-6">
 				<div className="flex items-center">
 					<Navbar.Collapse>
 						<Navbar.Link
