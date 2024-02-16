@@ -7,7 +7,15 @@ import {
 	ref,
 	uploadBytesResumable,
 } from "firebase/storage";
-import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
+import {
+	Alert,
+	Button,
+	Checkbox,
+	FileInput,
+	Label,
+	Select,
+	TextInput,
+} from "flowbite-react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ReactQuill from "react-quill";
@@ -98,14 +106,27 @@ export default function CreatePost() {
 				className="flex flex-col gap-4"
 				onSubmit={handleSubmit}
 			>
-				<TextInput
-					type="text"
-					placeholder="Title"
-					required
-					id="title"
-					className="w-full"
-					onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-				/>
+				<div className="flex flex-col gap-4 sm:flex-row justify-between">
+					<TextInput
+						type="text"
+						placeholder="Title"
+						required
+						id="title"
+						className="flex-1"
+						onChange={(e) =>
+							setFormData({ ...formData, title: e.target.value })
+						}
+					/>
+					<div className="flex items-center gap-2 justify-end">
+						<Checkbox
+							id="featured"
+							onChange={(e) =>
+								setFormData({ ...formData, isFeatured: e.target.checked })
+							}
+						/>
+						<Label htmlFor="featured">Featured</Label>
+					</div>
+				</div>
 				<div className="flex flex-col gap-4 sm:flex-row justify-between">
 					<TextInput
 						type="text"

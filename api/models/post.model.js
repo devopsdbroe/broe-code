@@ -29,6 +29,10 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			default: "uncategorized",
 		},
+		isFeatured: {
+			type: Boolean,
+			default: false,
+		},
 		slug: {
 			type: String,
 			required: true,

@@ -5,6 +5,7 @@ import PostCard from "../components/PostCard";
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
+	const [featuredPosts, setFeaturedPosts] = useState([]);
 
 	useEffect(() => {
 		const fetchPosts = async () => {
@@ -16,6 +17,19 @@ export default function Home() {
 		};
 		fetchPosts();
 	}, []);
+
+	useEffect(() => {
+		const fetchFeaturedPosts = async () => {
+			const res = await fetch("/api/post/getFeaturedPosts");
+			const data = await res.json();
+			if (res.ok) {
+				setFeaturedPosts(data);
+			}
+		};
+		fetchFeaturedPosts();
+	}, []);
+
+	console.log(featuredPosts);
 
 	return (
 		<div>

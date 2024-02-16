@@ -17,6 +17,7 @@ export const create = async (req, res, next) => {
 		.join("-")
 		.toLowerCase()
 		.replace(/[^a-zA-Z0-9-]/g, "");
+
 	const newPost = new Post({
 		...req.body,
 		slug,
@@ -40,6 +41,7 @@ export const getPosts = async (req, res, next) => {
 		const posts = await Post.find({
 			...(req.query.userId && { userId: req.query.userId }),
 			...(req.query.category && { category: req.query.category }),
+			...(req.query.isFeatured && { isFeatured: req.query.isFeatured }),
 			...(req.query.slug && { slug: req.query.slug }),
 			...(req.query.postId && { _id: req.query.postId }),
 			...(req.query.searchTerm && {
@@ -108,11 +110,25 @@ export const updatePost = async (req, res, next) => {
 					content: req.body.content,
 					category: req.body.category,
 					image: req.body.image,
+					isFeatured: req.body.isFeatured,
 				},
 			},
 			{ new: true }
 		);
 		res.status(200).json(updatedPost);
+	} catch (error) {
+		next(error);
+	}
+};
+
+export const getFeaturedPosts = async (req, res, next) => {
+	try {
+		const featuredPosts = await Post.find({
+			isFeatured: true,
+		})
+			.sort({ updatedAt: -1 })
+			.limit(3);
+		res.status(200).json(featuredPosts);
 	} catch (error) {
 		next(error);
 	}
