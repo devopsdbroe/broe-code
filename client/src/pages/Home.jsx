@@ -8,7 +8,7 @@ export default function Home() {
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const res = await fetch("/api/post/getPosts");
+			const res = await fetch("/api/post/getPosts?limit=3");
 			const data = await res.json();
 			if (res.ok) {
 				setPosts(data.posts);
