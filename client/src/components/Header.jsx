@@ -3,15 +3,23 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { toggleTheme } from "../redux/theme/themeSlice";
+import { setSearchTerm } from "../redux/search/searchSlice";
 import {
-	setSearchTerm as setGlobalSearchTerm,
-	setSearchTerm,
-} from "../redux/search/searchSlice";
-import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
+	Avatar,
+	Button,
+	Checkbox,
+	Label,
+	Modal,
+	Dropdown,
+	Navbar,
+	TextInput,
+} from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 export default function Header() {
+	const [openModal, setOpenModal] = useState(false);
+
 	const path = useLocation().pathname;
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -51,86 +59,36 @@ export default function Header() {
 		e.preventDefault();
 		const urlParams = new URLSearchParams(location.search);
 		// Set search term globally using Redux
-		dispatch(setGlobalSearchTerm(searchTerm));
+		dispatch(setSearchTerm(searchTerm));
 		urlParams.set("searchTerm", searchTerm);
 		const searchQuery = urlParams.toString();
 		navigate(`/search?${searchQuery}`);
+		setOpenModal(false);
 	};
 
 	return (
-		<Navbar
-			fluid
-			className="border-b-2"
-		>
-			<div className="flex items-center gap-4">
-				<div>
-					<Link
-						to="/"
-						className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
-					>
-						{/* TODO: Update name + styling */}
-						{/* TODO: Create separate Logo component? */}
-						<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-							Football
-						</span>
-						Blog
-					</Link>
-				</div>
-			</div>
-			<div>
-				<form
-					onSubmit={handleSubmit}
-					className="relative flex lg:w-[600px]"
+		<>
+			<Navbar className="border-b-2 relative">
+				<Link
+					to="/"
+					className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
 				>
-					<TextInput
-						type="text"
-						placeholder="Search"
-						className="pl-3 pr-10 w-full hidden lg:inline" // Adjust padding to make space for the button
-						value={searchTerm}
-						onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-					/>
-					{/* The button is now absolutely positioned within the form. */}
+					{/* TODO: Update name + styling */}
+					{/* TODO: Create separate Logo component? */}
+					<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
+						Football
+					</span>
+					Blog
+				</Link>
+				<div className="flex gap-2 md:order-2">
 					<Button
-						type="submit"
-						className="absolute inset-y-0 right-10 items-center justify-center px-3 hidden lg:flex"
-					>
-						<AiOutlineSearch />
-					</Button>
-				</form>
-				<Link to="/search">
-					<Button
-						className="w-12 h-10 lg:hidden"
+						onClick={() => setOpenModal(true)}
+						className="w-12 h-10"
 						color="gray"
 						pill
 					>
 						<AiOutlineSearch />
 					</Button>
-				</Link>
-			</div>
-			<div className="flex gap-2 sm:gap-6">
-				<div className="flex items-center">
-					<Navbar.Collapse>
-						<Navbar.Link
-							active={path === "/"}
-							as={"div"}
-						>
-							<Link to="/">Home</Link>
-						</Navbar.Link>
-						<Navbar.Link
-							active={path === "/about"}
-							as={"div"}
-						>
-							<Link to="/about">About</Link>
-						</Navbar.Link>
-						<Navbar.Link
-							active={path === "/projects"}
-							as={"div"}
-						>
-							<Link to="/projects">Projects</Link>
-						</Navbar.Link>
-					</Navbar.Collapse>
-				</div>
-				<div className="flex gap-2">
 					<Button
 						className="w-12 h-10 hidden sm:inline"
 						color="gray"
@@ -173,10 +131,69 @@ export default function Header() {
 							</Button>
 						</Link>
 					)}
-				</div>
 
-				<Navbar.Toggle />
-			</div>
-		</Navbar>
+					<Navbar.Toggle />
+				</div>
+				<Navbar.Collapse>
+					<Navbar.Link
+						active={path === "/"}
+						as={"div"}
+					>
+						<Link to="/">Home</Link>
+					</Navbar.Link>
+					<Navbar.Link
+						active={path === "/about"}
+						as={"div"}
+					>
+						<Link to="/about">About</Link>
+					</Navbar.Link>
+					<Navbar.Link
+						active={path === "/search"}
+						as={"div"}
+					>
+						<Link to="/search">Articles</Link>
+					</Navbar.Link>
+					<Navbar.Link
+						active={path === "/teams"}
+						as={"div"}
+					>
+						<Link to="/teams">Teams</Link>
+					</Navbar.Link>
+					<Navbar.Link
+						active={path === "/forums"}
+						as={"div"}
+					>
+						<Link to="/forums">Forums</Link>
+					</Navbar.Link>
+				</Navbar.Collapse>
+			</Navbar>
+			<Modal
+				dismissible
+				show={openModal}
+				onClose={() => setOpenModal(false)}
+				position="top-center"
+				className="pt-10"
+			>
+				<form
+					onSubmit={handleSubmit}
+					className="relative"
+				>
+					<TextInput
+						type="text"
+						placeholder="Search"
+						value={searchTerm}
+						onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+						className="absolute w-full"
+					/>
+					<Button
+						type="submit"
+						color="gray"
+						className="w-12 h-10 absolute right-0"
+					>
+						<AiOutlineSearch />
+					</Button>
+				</form>
+			</Modal>
+		</>
 	);
 }
