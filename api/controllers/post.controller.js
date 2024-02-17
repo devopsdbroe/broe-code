@@ -39,6 +39,7 @@ export const getPosts = async (req, res, next) => {
 		const sortDirection = req.query.order === "asc" ? 1 : -1;
 		// Search posts based on query parameters
 		const posts = await Post.find({
+			// Only search is query parameter exists in URL
 			...(req.query.userId && { userId: req.query.userId }),
 			...(req.query.category && { category: req.query.category }),
 			...(req.query.isFeatured && { isFeatured: req.query.isFeatured }),
@@ -121,6 +122,7 @@ export const updatePost = async (req, res, next) => {
 	}
 };
 
+// Fetch the 3 most recently updated posts with isFeatured marked as true
 export const getFeaturedPosts = async (req, res, next) => {
 	try {
 		const featuredPosts = await Post.find({
