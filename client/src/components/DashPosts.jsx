@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Modal, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 export default function DashPosts() {
 	const { currentUser } = useSelector((state) => state.user);
@@ -91,6 +92,7 @@ export default function DashPosts() {
 							<Table.HeadCell>Post image</Table.HeadCell>
 							<Table.HeadCell>Post title</Table.HeadCell>
 							<Table.HeadCell>Category</Table.HeadCell>
+							<Table.HeadCell>Featured</Table.HeadCell>
 							<Table.HeadCell>Delete</Table.HeadCell>
 							<Table.HeadCell>
 								<span>Edit</span>
@@ -123,6 +125,13 @@ export default function DashPosts() {
 										</Link>
 									</Table.Cell>
 									<Table.Cell>{post.category}</Table.Cell>
+									<Table.Cell>
+										{post.isFeatured ? (
+											<FaCheck className="text-green-500" />
+										) : (
+											<FaTimes className="text-red-500" />
+										)}
+									</Table.Cell>
 									<Table.Cell>
 										<span
 											onClick={() => {

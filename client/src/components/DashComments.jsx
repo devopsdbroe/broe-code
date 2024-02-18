@@ -104,7 +104,9 @@ export default function DashComments() {
 									<Table.Cell>
 										{new Date(comment.updatedAt).toLocaleDateString()}
 									</Table.Cell>
-									<Table.Cell>{comment.content}</Table.Cell>
+									<Table.Cell className="truncate">
+										{comment.content}
+									</Table.Cell>
 									<Table.Cell>{comment.numberOfLikes}</Table.Cell>
 									<Table.Cell>{comment.postId.title}</Table.Cell>
 									<Table.Cell>{comment.userId.username}</Table.Cell>
