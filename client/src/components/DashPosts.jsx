@@ -8,6 +8,7 @@ export default function DashPosts() {
 	const { currentUser } = useSelector((state) => state.user);
 
 	const [userPosts, setUserPosts] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const [showMore, setShowMore] = useState(true);
 
 	// State for deleting posts
@@ -16,6 +17,7 @@ export default function DashPosts() {
 
 	useEffect(() => {
 		const fetchPosts = async () => {
+			setIsLoading(true);
 			try {
 				const res = await fetch(`/api/post/getPosts?userId=${currentUser._id}`);
 				const data = await res.json();
@@ -24,6 +26,7 @@ export default function DashPosts() {
 					if (data.length < 9) {
 						setShowMore(false);
 					}
+					setIsLoading(false);
 				}
 			} catch (error) {
 				console.log(error.message);
@@ -152,6 +155,8 @@ export default function DashPosts() {
 						</button>
 					)}
 				</>
+			) : isLoading ? (
+				<p>Loading...</p>
 			) : (
 				<p>You have no posts yet</p>
 			)}

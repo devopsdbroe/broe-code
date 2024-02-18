@@ -8,6 +8,7 @@ export default function DashUsers() {
 	const { currentUser } = useSelector((state) => state.user);
 
 	const [users, setUsers] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const [showMore, setShowMore] = useState(true);
 
 	// State for deleting posts
@@ -15,6 +16,7 @@ export default function DashUsers() {
 	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
 		const fetchUsers = async () => {
 			try {
 				const res = await fetch(`/api/user/getUsers`);
@@ -24,6 +26,7 @@ export default function DashUsers() {
 					if (data.users.length < 9) {
 						setShowMore(false);
 					}
+					setIsLoading(false);
 				}
 			} catch (error) {
 				console.log(error);
@@ -135,6 +138,8 @@ export default function DashUsers() {
 						</button>
 					)}
 				</>
+			) : isLoading ? (
+				<p>Loading...</p>
 			) : (
 				<p>There are no users yet</p>
 			)}

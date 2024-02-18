@@ -7,6 +7,7 @@ export default function DashComments() {
 	const { currentUser } = useSelector((state) => state.user);
 
 	const [comments, setComments] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const [showMore, setShowMore] = useState(true);
 
 	// State for deleting posts
@@ -15,6 +16,7 @@ export default function DashComments() {
 
 	useEffect(() => {
 		const fetchComments = async () => {
+			setIsLoading(true);
 			try {
 				const res = await fetch(`/api/comment/getComments`);
 				const data = await res.json();
@@ -23,6 +25,7 @@ export default function DashComments() {
 					if (data.comments.length < 9) {
 						setShowMore(false);
 					}
+					setIsLoading(false);
 				}
 			} catch (error) {
 				console.log(error);
@@ -129,6 +132,8 @@ export default function DashComments() {
 						</button>
 					)}
 				</>
+			) : isLoading ? (
+				<p>Loading...</p>
 			) : (
 				<p>There are no comments yet</p>
 			)}
