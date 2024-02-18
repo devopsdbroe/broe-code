@@ -7,7 +7,12 @@ export const create = async (req, res, next) => {
 	}
 
 	// Check to make sure user fills out all required fields
-	if (!req.body.title || !req.body.content || !req.body.author) {
+	if (
+		!req.body.title ||
+		!req.body.content ||
+		!req.body.author ||
+		!req.body.description
+	) {
 		return next(errorHandler(400, "Please provide all required fields"));
 	}
 
@@ -108,6 +113,7 @@ export const updatePost = async (req, res, next) => {
 				$set: {
 					title: req.body.title,
 					author: req.body.author,
+					description: req.body.description,
 					content: req.body.content,
 					category: req.body.category,
 					image: req.body.image,

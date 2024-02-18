@@ -39,8 +39,9 @@ export default function UpdatePost() {
 	const [formData, setFormData] = useState({
 		title: "",
 		author: "",
-		category: "",
+		description: "",
 		content: "",
+		category: "",
 		image: "",
 		isFeatured: false,
 	});
@@ -227,6 +228,14 @@ export default function UpdatePost() {
 						className="w-full h-72 object-cover"
 					/>
 				)}
+				<TextInput
+					placeholder="Please enter a brief description here..."
+					required
+					onChange={(e) =>
+						setFormData({ ...formData, description: e.target.value })
+					}
+					value={formData.description}
+				/>
 				<ReactQuill
 					theme="snow"
 					placeholder="Write something..."

@@ -104,9 +104,8 @@ export default function Home() {
 									<h2 className="text-xl sm:text-3xl font-bold">
 										{feat.title}
 									</h2>
-									{/* TODO: Need to add summary to DB model */}
 									<p className="text-md sm:text-xl font-semibold">
-										Summary goes here
+										{feat.description}
 									</p>
 									<Link
 										to={`/post/${feat.slug}`}
