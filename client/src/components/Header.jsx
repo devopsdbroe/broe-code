@@ -75,10 +75,15 @@ export default function Header() {
 				>
 					{/* TODO: Update name + styling */}
 					{/* TODO: Create separate Logo component? */}
+					From
 					<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-						Football
+						Broe
 					</span>
-					Blog
+					To
+					<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
+						Pro
+					</span>
+					Stack
 				</Link>
 				<div className="flex gap-2 md:order-2">
 					<Button
@@ -152,18 +157,6 @@ export default function Header() {
 						as={"div"}
 					>
 						<Link to="/search">Articles</Link>
-					</Navbar.Link>
-					<Navbar.Link
-						active={path === "/teams"}
-						as={"div"}
-					>
-						<Link to="/teams">Teams</Link>
-					</Navbar.Link>
-					<Navbar.Link
-						active={path === "/forums"}
-						as={"div"}
-					>
-						<Link to="/forums">Forums</Link>
 					</Navbar.Link>
 				</Navbar.Collapse>
 			</Navbar>

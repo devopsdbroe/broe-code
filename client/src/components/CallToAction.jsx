@@ -8,8 +8,8 @@ export default function CallToAction() {
 					Have suggestions on how to improve the site?
 				</h2>
 				<p className="text-gray-500 my-2">
-					Send us an email with your ideas. We're always looking to improve the
-					user experience!
+					Send me an email with your ideas. I&apos;re always looking to improve
+					the user experience!
 				</p>
 				{/* TODO: Add link to contact page or email system */}
 				<Button

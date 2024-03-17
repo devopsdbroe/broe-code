@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Button, Select, TextInput } from "flowbite-react";
-import { teams } from "../../constants/data";
+import { topics } from "../../constants/data";
 import PostCard from "../components/PostCard";
 import { clearSearchTerm } from "../redux/search/searchSlice";
 
@@ -153,12 +153,12 @@ export default function Search() {
 							id="category"
 						>
 							<option value="uncategorized">Uncategorized</option>
-							{teams.map((team) => (
+							{topics.map((topic) => (
 								<option
-									key={team.id}
-									value={team.value}
+									key={topic.id}
+									value={topic.value}
 								>
-									{team.name}
+									{topic.name}
 								</option>
 							))}
 						</Select>

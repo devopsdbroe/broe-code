@@ -20,7 +20,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { teams } from "../../constants/data";
+import { topics } from "../../constants/data";
 
 export default function CreatePost() {
 	const navigate = useNavigate();
@@ -143,13 +143,14 @@ export default function CreatePost() {
 							setFormData({ ...formData, category: e.target.value })
 						}
 					>
-						<option value="uncategorized">Select a team</option>
-						{teams.map((team) => (
+						<option value="uncategorized">Select a topic</option>
+						{topics.map((topic) => (
 							<option
-								id={team.id}
-								value={team.value}
+								key={topic.id}
+								id={topic.id}
+								value={topic.value}
 							>
-								{team.name}
+								{topic.name}
 							</option>
 						))}
 					</Select>
