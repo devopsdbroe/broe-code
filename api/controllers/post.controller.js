@@ -7,12 +7,7 @@ export const create = async (req, res, next) => {
 	}
 
 	// Check to make sure user fills out all required fields
-	if (
-		!req.body.title ||
-		!req.body.content ||
-		!req.body.author ||
-		!req.body.description
-	) {
+	if (!req.body.title || !req.body.content || !req.body.author) {
 		return next(errorHandler(400, "Please provide all required fields"));
 	}
 
@@ -112,7 +107,6 @@ export const updatePost = async (req, res, next) => {
 				$set: {
 					title: req.body.title,
 					author: req.body.author,
-					description: req.body.description,
 					content: req.body.content,
 					category: req.body.category,
 					image: req.body.image,
@@ -125,17 +119,3 @@ export const updatePost = async (req, res, next) => {
 		next(error);
 	}
 };
-
-// Fetch the 3 most recently updated posts with isFeatured marked as true
-// export const getFeaturedPosts = async (req, res, next) => {
-// 	try {
-// 		const featuredPosts = await Post.find({
-// 			isFeatured: true,
-// 		})
-// 			.sort({ updatedAt: -1 })
-// 			.limit(3);
-// 		res.status(200).json(featuredPosts);
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// };

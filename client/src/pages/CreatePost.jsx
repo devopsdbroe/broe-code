@@ -180,13 +180,6 @@ export default function CreatePost() {
 						className="w-full h-72 object-cover"
 					/>
 				)}
-				<TextInput
-					placeholder="Please enter a brief description here..."
-					required
-					onChange={(e) =>
-						setFormData({ ...formData, description: e.target.value })
-					}
-				/>
 				<ReactQuill
 					theme="snow"
 					placeholder="Write something..."
