@@ -117,15 +117,6 @@ export default function CreatePost() {
 							setFormData({ ...formData, title: e.target.value })
 						}
 					/>
-					<div className="flex items-center gap-2 justify-end">
-						<Checkbox
-							id="featured"
-							onChange={(e) =>
-								setFormData({ ...formData, isFeatured: e.target.checked })
-							}
-						/>
-						<Label htmlFor="featured">Featured</Label>
-					</div>
 				</div>
 				<div className="flex flex-col gap-4 sm:flex-row justify-between">
 					<TextInput

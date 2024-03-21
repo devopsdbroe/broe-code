@@ -1,11 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CallToAction from "../components/CallToAction";
 import PostCard from "../components/PostCard";
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
-	const [featuredPosts, setFeaturedPosts] = useState([]);
 
 	useEffect(() => {
 		const fetchPosts = async () => {
@@ -18,22 +17,11 @@ export default function Home() {
 		fetchPosts();
 	}, []);
 
-	useEffect(() => {
-		const fetchFeaturedPosts = async () => {
-			const res = await fetch("/api/post/getFeaturedPosts");
-			const data = await res.json();
-			if (res.ok) {
-				setFeaturedPosts(data);
-			}
-		};
-		fetchFeaturedPosts();
-	}, []);
-
 	return (
 		<div>
 			<div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
 				<h1 className="text-3xl font-bold lg:text-6xl">
-					Welcome to FromBroeToProStack
+					Welcome to Broe Code!
 				</h1>
 				<p className="text-gray-500 text-xs sm:text-sm">
 					Here I&apos;ll be sharing my journey from novice to full stack expert!

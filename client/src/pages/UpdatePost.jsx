@@ -43,7 +43,6 @@ export default function UpdatePost() {
 		content: "",
 		category: "",
 		image: "",
-		isFeatured: false,
 	});
 
 	useEffect(() => {
@@ -154,16 +153,6 @@ export default function UpdatePost() {
 						}
 						value={formData.title}
 					/>
-					<div className="flex items-center gap-2 justify-end">
-						<Checkbox
-							id="featured"
-							onChange={(e) =>
-								setFormData({ ...formData, isFeatured: e.target.checked })
-							}
-							checked={formData.isFeatured}
-						/>
-						<Label htmlFor="featured">Featured</Label>
-					</div>
 				</div>
 				<div className="flex flex-col gap-4 sm:flex-row justify-between">
 					<TextInput

@@ -75,15 +75,10 @@ export default function Header() {
 				>
 					{/* TODO: Update name + styling */}
 					{/* TODO: Create separate Logo component? */}
-					From
 					<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
 						Broe
 					</span>
-					To
-					<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-						Pro
-					</span>
-					Stack
+					Code
 				</Link>
 				<div className="flex gap-2 md:order-2">
 					<Button

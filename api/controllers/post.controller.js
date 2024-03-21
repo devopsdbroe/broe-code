@@ -47,7 +47,6 @@ export const getPosts = async (req, res, next) => {
 			// Only search is query parameter exists in URL
 			...(req.query.userId && { userId: req.query.userId }),
 			...(req.query.category && { category: req.query.category }),
-			...(req.query.isFeatured && { isFeatured: req.query.isFeatured }),
 			...(req.query.slug && { slug: req.query.slug }),
 			...(req.query.postId && { _id: req.query.postId }),
 			...(req.query.searchTerm && {
@@ -117,7 +116,6 @@ export const updatePost = async (req, res, next) => {
 					content: req.body.content,
 					category: req.body.category,
 					image: req.body.image,
-					isFeatured: req.body.isFeatured,
 				},
 			},
 			{ new: true }
@@ -129,15 +127,15 @@ export const updatePost = async (req, res, next) => {
 };
 
 // Fetch the 3 most recently updated posts with isFeatured marked as true
-export const getFeaturedPosts = async (req, res, next) => {
-	try {
-		const featuredPosts = await Post.find({
-			isFeatured: true,
-		})
-			.sort({ updatedAt: -1 })
-			.limit(3);
-		res.status(200).json(featuredPosts);
-	} catch (error) {
-		next(error);
-	}
-};
+// export const getFeaturedPosts = async (req, res, next) => {
+// 	try {
+// 		const featuredPosts = await Post.find({
+// 			isFeatured: true,
+// 		})
+// 			.sort({ updatedAt: -1 })
+// 			.limit(3);
+// 		res.status(200).json(featuredPosts);
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// };

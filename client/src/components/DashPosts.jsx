@@ -126,13 +126,6 @@ export default function DashPosts() {
 									</Table.Cell>
 									<Table.Cell>{post.category}</Table.Cell>
 									<Table.Cell>
-										{post.isFeatured ? (
-											<FaCheck className="text-green-500" />
-										) : (
-											<FaTimes className="text-red-500" />
-										)}
-									</Table.Cell>
-									<Table.Cell>
 										<span
 											onClick={() => {
 												setShowModal(true);
