@@ -59,9 +59,9 @@ export default function SignUp() {
 						{/* TODO: Update name + styling */}
 						{/* TODO: Create separate Logo component? */}
 						<span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-							Football
+							Broe
 						</span>
-						Blog
+						Code
 					</Link>
 					<p className="text-sm mt-5">
 						This is a demo project. You can sign up with your email and password

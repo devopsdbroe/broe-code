@@ -29,19 +29,19 @@ export default function FooterCom() {
 							Code
 						</Link>
 					</div>
-					<div className="grid grid-cols-2 gap-8 mt-4 sm:gap-6">
+					<div className="grid grid-cols-2 gap-8 mt-4 sm:gap-10">
 						<div>
 							<Footer.Title title="About" />
 							<Footer.LinkGroup col>
 								<Footer.Link
-									href="https://www.100jsprojects.com"
+									href="/about"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									100 JS Projects
+									About me
 								</Footer.Link>
 								<Footer.Link
-									href="/about"
+									href="https://daniel-broe-portfolio.vercel.app/"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
