@@ -85,13 +85,17 @@ export default function PostPage() {
 				className="mt-10 p-3 max-h-[600px] w-full object-cover"
 			/>
 			<div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs">
-				<span>
-					By <span className="font-bold">{post && post.author}</span> -{" "}
-					{post && post.createdAt === post.updatedAt ? (
-						<>Posted on {new Date(post.createdAt).toLocaleDateString()}</>
-					) : (
-						<>Updated on {new Date(post.updatedAt).toLocaleDateString()}</>
-					)}
+				<span className="flex flex-col">
+					<span>
+						By <span className="font-bold">{post && post.author}</span> - Posted
+						on {new Date(post.createdAt).toLocaleDateString()}
+					</span>
+
+					<span className="mt-1">
+						{post && post.createdAt === post.updatedAt && (
+							<>Updated on {new Date(post.updatedAt).toLocaleDateString()}</>
+						)}
+					</span>
 				</span>
 				{/* Calculate estimated read time based on length of article */}
 				<span className="italic">
