@@ -95,7 +95,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
 								Save
 							</Button>
 							<Button
-								onClick={() => isEditing(false)}
+								onClick={() => setIsEditing(false)}
 								type="button"
 								size="sm"
 								gradientDuoTone="purpleToBlue"
