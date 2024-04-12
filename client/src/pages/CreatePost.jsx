@@ -7,15 +7,7 @@ import {
 	ref,
 	uploadBytesResumable,
 } from "firebase/storage";
-import {
-	Alert,
-	Button,
-	Checkbox,
-	FileInput,
-	Label,
-	Select,
-	TextInput,
-} from "flowbite-react";
+import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ReactQuill from "react-quill";

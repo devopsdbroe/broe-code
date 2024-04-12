@@ -14,7 +14,7 @@ export default function CallToAction() {
 					gradientDuoTone="purpleToPink"
 					className="rounded-tr-none rounded-bl-none"
 				>
-					<Link to="#">Projects Page</Link>
+					<Link to="/projects">Projects Page</Link>
 				</Button>
 			</div>
 			<div className="p-7 flex-1">
