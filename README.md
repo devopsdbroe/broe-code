@@ -1,4 +1,4 @@
-# Fullstack Real Estate Application: React, MongoDB, Express, Node.js
+# Fullstack Blog Application: React, MongoDB, Express, Node.js
 
 ![Broe Code Thumbnail](https://github.com/devopsdbroe/broe-code/blob/main/broecode.png)
 
@@ -6,17 +6,17 @@ This is a repository for the Fullstack React Blog Application using the MERN sta
 
 Key Features:
 
-📝 Create, edit, and delete blog posts through a user-friendly interface.
-🔒 User authentication with JWT for secure access.
-💾 Data is stored persistently in MongoDB.
-📊 Admin Dashboard for managing posts, users, and settings.
-🔍 Full-text search capabilities to easily navigate through posts.
-🌐 Fully responsive design for an optimal experience on both desktop and mobile devices.
-🎨 Light and Dark Mode Themes.
-🗃️ Backend logic handled by Express.js for robust API services.
-🏠 Dynamic homepage featuring latest and trending posts.
-📡 Extensive APIs to interface with the frontend.
-🔄 Uses Redux for efficient state management across the React application.
+- 📝 Create, edit, and delete blog posts through a user-friendly interface.
+- 🔒 User authentication with JWT for secure access.
+- 💾 Data is stored persistently in MongoDB.
+- 📊 Admin Dashboard for managing posts, users, and settings.
+- 🔍 Full-text search capabilities to easily navigate through posts.
+- 🌐 Fully responsive design for an optimal experience on both desktop and mobile devices.
+- 🎨 Light and Dark Mode Themes.
+- 🗃️ Backend logic handled by Express.js for robust API services.
+- 🏠 Dynamic homepage featuring latest and trending posts.
+- 📡 Extensive APIs to interface with the frontend.
+- 🔄 Uses Redux for efficient state management across the React application.
 
 ### Prerequisites
 
