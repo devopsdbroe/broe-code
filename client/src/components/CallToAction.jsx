@@ -10,12 +10,17 @@ export default function CallToAction() {
 					Check out some of the projects that I&apos;ve already finished and/or
 					am currently working on!
 				</p>
-				<Button
-					gradientDuoTone="purpleToPink"
-					className="rounded-tr-none rounded-bl-none"
+				<Link
+					to="/projects"
+					className="w-full"
 				>
-					<Link to="/projects">Projects Page</Link>
-				</Button>
+					<Button
+						gradientDuoTone="purpleToPink"
+						className="rounded-tr-none rounded-bl-none w-full"
+					>
+						Projects Page
+					</Button>
+				</Link>
 			</div>
 			<div className="p-7 flex-1">
 				<img
