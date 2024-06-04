@@ -1,9 +1,9 @@
 import MernEstate from "../assets/mernestate.png";
 import QuoteGenerator from "../assets/quotegenerator.png";
-import AiSummarizer from "../assets/ai_summarizer.png";
-import Gamehub from "../assets/gamehub.png";
-import DevFlow from "../assets/devflow.png";
 import Ecomm from "../assets/ecomm.png";
+import DevFlow from "../assets/devflow.png";
+import Gericht from "../assets/gericht.png";
+import GPT3 from "../assets/gpt3.png";
 
 export const topics = [
 	{ id: 1, value: "html/css", name: "HTML/CSS" },
@@ -20,48 +20,50 @@ export const projectsData = [
 		id: 1,
 		title: "MERN Estate",
 		url: "https://mern-estate-b28f.onrender.com/",
-		category: "Web Development",
+		category: "Full Stack",
 		image: MernEstate,
-		description: "This is a description of project one.",
+		description:
+			"A real estate website built using MERN stack and deployed using Render",
 	},
 	{
 		id: 2,
 		title: "Inspirational Quote Generator",
 		url: "https://prod.d2x5at9p7rhcg4.amplifyapp.com/",
-		category: "Web Development",
+		category: "Full Stack",
 		image: QuoteGenerator,
-		description: "This is a description of project one.",
+		description:
+			"An inspirational quote generator project built with Next.js and deployed using AWS Amplify",
 	},
 	{
 		id: 3,
-		title: "AI Summarizer",
-		url: "https://ai-summarizer-rho-lilac.vercel.app/",
-		category: "Web Development",
-		image: AiSummarizer,
-		description: "This is a description of project one.",
+		title: "Ecomm Website",
+		url: "https://ecomm-website.vercel.app/",
+		category: "Front End",
+		image: Ecomm,
+		description: "A basic front-end ecommerce website.",
 	},
 	{
 		id: 4,
-		title: "Gamehub",
+		title: "DevFlow",
 		url: "https://example.com/project-one",
-		category: "Web Development",
-		image: Gamehub,
-		description: "This is a description of project one.",
+		category: "Full Stack",
+		image: DevFlow,
+		description: "A Stack Overflow clone built using Next.js",
 	},
 	{
 		id: 5,
-		title: "DevFlow",
-		url: "https://example.com/project-one",
-		category: "Web Development",
-		image: DevFlow,
-		description: "This is a description of project one.",
+		title: "Gericht Restuarant",
+		url: "https://gericht-restaurant-rho-beige.vercel.app/",
+		category: "Front End",
+		image: Gericht,
+		description: "A landing page for a fancy restaurant.",
 	},
 	{
 		id: 6,
-		title: "Ecomm Website",
-		url: "https://ecomm-website.vercel.app/",
-		category: "Web Development",
-		image: Ecomm,
-		description: "A basic front-end ecommerce website.",
+		title: "GPT-3 Demo Site",
+		url: "https://gpt3-jsm-eta.vercel.app/",
+		category: "Front End",
+		image: GPT3,
+		description: "A demo page for the now outdated GPT-3.",
 	},
 ];
