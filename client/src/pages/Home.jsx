@@ -19,7 +19,7 @@ export default function Home() {
 
 	return (
 		<div>
-			<div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
+			<div className="flex flex-col gap-6 p-28 px-10 max-w-6xl mx-auto">
 				<h1 className="text-3xl font-bold lg:text-6xl">Welcome to Broe Code</h1>
 				<p className="text-gray-500 text-xs sm:text-sm">
 					Here I&apos;ll be sharing my journey from novice to full-stack expert
