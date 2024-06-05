@@ -45,7 +45,7 @@ export const projectsData = [
 	{
 		id: 4,
 		title: "DevFlow",
-		url: "devflow-gules.vercel.app",
+		url: "https://devflow-gules.vercel.app",
 		category: "Full Stack",
 		image: DevFlow,
 		description: "A Stack Overflow clone built using Next.js",
